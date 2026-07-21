@@ -4,6 +4,7 @@ import "./globals.css";
 import { Inter, Geist_Mono, Instrument_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import { Navbar } from "@/components/shared/navbar";
 
 const instrumentSansHeading = Instrument_Sans({subsets:['latin'],variable:'--font-heading'});
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       className={cn("h-full antialiased", inter.variable, "font-mono", geistMono.variable, instrumentSansHeading.variable)}
     >
       <body className="min-h-full flex flex-col">
+        <Navbar></Navbar>
         
         {children}
         <Toaster />

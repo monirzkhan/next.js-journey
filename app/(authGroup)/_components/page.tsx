@@ -7,20 +7,22 @@ import  { useActionState, useEffect } from 'react';
 import { loginAction } from '../_actions/AuthAction';
 import { toast } from 'sonner';
 
+
 const LoginForm = () => {
     const [state, action, pending] = useActionState(loginAction, false)
+    // const router=useRouter()
 
     useEffect(() => {
         if (!state) {
             return
         }
 
-        if(state.success){
-            toast.success(state.message || "Login Successful");
-            // router.push("/dashboard")
-        }
+        // if(state.success){
+        //     toast.success(state.message || "Login Successful", {position:'top-right'});
+        //     // router.push("/tenant-dashboard")
+        // }
         if (!state.success) {
-            toast.error(state.message || "Login failed");
+            toast.error(state.message || "Login failed", {position:'top-left'});
         }
     }, [state])
     return (

@@ -1,6 +1,9 @@
 'use server'
 
-type LoginState={
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+
+type LoginState = {
     success: boolean,
     statusCode: number,
     message: string,
@@ -30,6 +33,23 @@ export const loginAction = async (loginState: LoginState, formData: FormData) =>
     })
 
     const result = await res.json()
+    if (result.success) {
+        const cookieStore = await cookies();
+        cookieStore.set('accessToken', result.data.accessToken, {
+
+            httpOnly: true,
+            maxAge: 60 * 60 * 24,
+            sameSite: "lax"
+        })
+
+        cookieStore.set('refreshToken', result.data.refreshToken, {
+
+            httpOnly: true,
+            maxAge: 60 * 60 * 24 * 7,
+            sameSite: "lax"
+        })
+        redirect('/tenant-dashboard', "replace")
+    }
     // console.log(result);
     return result
 }

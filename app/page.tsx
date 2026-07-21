@@ -1,10 +1,12 @@
+import { getMe } from "@/service/getMe";
 import Link from "next/link";
 
 
 
-export default function Home() {
+export default async function Home () {
 
-  console.log("Root Server");
+  const user= await getMe();
+  console.log(user);
   return (
     
     <div>
