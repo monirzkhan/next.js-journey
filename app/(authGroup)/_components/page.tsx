@@ -1,19 +1,40 @@
+"use client"
+
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import React from 'react';
+import  { useActionState, useEffect } from 'react';
+import { loginAction } from '../_actions/AuthAction';
+import { toast } from 'sonner';
 
 const LoginForm = () => {
+    const [state, action, pending] = useActionState(loginAction, false)
+
+    useEffect(() => {
+        if (!state) {
+            return
+        }
+
+        if(state.success){
+            toast.success(state.message || "Login Successful");
+            // router.push("/dashboard")
+        }
+        if (!state.success) {
+            toast.error(state.message || "Login failed");
+        }
+    }, [state])
     return (
-       <form className='space-y-4'>
-        <Card className='p-4 space-y-4'>
-            <Input name='email' type='email' placeholder='enter your email' required/>
-            <Input name='password' type='password' placeholder='enter your password' required/>
-            <Button type='submit'>
-                Login
-            </Button>
-        </Card>
-       </form>
+        <form action={action} className='space-y-4'>
+            <Card className='p-4 space-y-4'>
+                <Input name='email' type='email' placeholder='enter your email' required />
+                <Input name='password' type='password' placeholder='enter your password' required />
+                <Button type='submit' variant={'ghost'} >
+                    {
+                        pending ? "Submitting" : "Login"
+                    }
+                </Button>
+            </Card>
+        </form>
     );
 };
 
