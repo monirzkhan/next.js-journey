@@ -36,13 +36,25 @@ export function proxy(request: NextRequest) {
 
     }
 
+    //Authintication
     const isPublicRoutes = PUBLIC_ROUTES.some((route) => pathName === route || pathName.startsWith(route + '/'))
 
-    const isAuthRoutes= AUTH_ROUTES.some((route)=> pathName===route || pathName.startsWith(route+'/'))
-    if(!accessToken && !isPublicRoutes && !isAuthRoutes){
+    const isAuthRoutes = AUTH_ROUTES.some((route) => pathName === route || pathName.startsWith(route + '/'))
+    if (!accessToken && !isPublicRoutes && !isAuthRoutes) {
         return NextResponse.redirect(new URL('/login', request.url))
     }
-    return NextResponse.next()
+
+    //Authorization
+    if (pathName.startsWith('/tenant-dashboard') && userRole !== 'TENANT'){
+        return NextResponse.redirect(new URL('/not-found', request.url))
+    }
+    else if (pathName.startsWith('/landlord-dashboard') && userRole !== 'LANDLORD'){
+        return NextResponse.redirect(new URL('/not-found', request.url))
+    }
+    if (pathName.startsWith('/admin-dashboard') && userRole !== 'ADMIN'){
+        return NextResponse.redirect(new URL('/not-found', request.url))
+    }
+        return NextResponse.next()
 
 
 

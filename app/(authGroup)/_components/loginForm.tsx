@@ -32,15 +32,15 @@ const LoginForm = () => {
             <Card className='p-4 space-y-4'>
                 <Input name='email' type='email' placeholder='enter your email' required />
                 <Input name='password' type='password' placeholder='enter your password' required />
-                <Button type='submit'  >
+                <Button type='submit'  className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150' >
                     {
                         pending ? "Submitting" : "Login"
                     }
                 </Button>
                 <p>
                     Don not have account? <span>
-                       <Link href={"/register"}>
-                        <Button >
+                       <Link href={"/register"} >
+                        <Button className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150'>
                             Register
                         </Button></Link>
                     </span>

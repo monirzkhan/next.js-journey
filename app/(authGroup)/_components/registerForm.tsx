@@ -29,7 +29,7 @@ const RegisterForm = () => {
                 <Input name='password' type='password' placeholder='enter your password' required />
                 <Input name='profilePhoto' type='text' placeholder='enter your photo Url'  />
                 <Input name='bio' type='text' placeholder='enter your bio'  />
-                <Button type='submit'  >
+                <Button type='submit'  className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150' >
                     {
                         pending? "Registering...":"Create Account"
                     }
@@ -37,7 +37,7 @@ const RegisterForm = () => {
                 <p>
                     Already have account? <span>
                        <Link href={"/login"}>
-                        <Button >
+                        <Button className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150' >
                             Login
                         </Button></Link>
                     </span>
